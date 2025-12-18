@@ -1,0 +1,67 @@
+import { BarChart2, TrendingUp, Edit3 } from "lucide-react";
+
+/* -----------------------------
+   Metrics Configuration Object
+-------------------------------- */
+const METRICS_CONFIG = [
+  {
+    id: "total",
+    label: "Total Metrics",
+    value: 248,
+    icon: BarChart2,
+    border: "border-blue-500",
+  },
+  {
+    id: "published",
+    label: "Published Metrics",
+    value: 192,
+    icon: TrendingUp,
+    border: "border-green-500",
+  },
+  {
+    id: "draft",
+    label: "Draft Metrics",
+    value: 9,
+    icon: Edit3,
+    border: "border-gray-400",
+  },
+];
+
+/* -----------------------------
+   Reusable Card Component
+-------------------------------- */
+const MetricCard = ({ label, value, Icon, border }) => (
+  <div
+    className={`flex items-center justify-between p-5 bg-white rounded-xl border-l-4 ${border} shadow-sm`}
+  >
+    <div>
+      <p className="text-sm text-gray-500">{label}</p>
+      <p className="text-3xl font-semibold text-gray-900">{value}</p>
+    </div>
+
+    <div className="p-3 bg-gray-100 rounded-lg">
+      <Icon className="w-6 h-6 text-gray-600" />
+    </div>
+  </div>
+);
+
+/* -----------------------------
+   Main Metrics Component
+-------------------------------- */
+const MetricsSummary = () => {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {METRICS_CONFIG.map((metric) => (
+        <MetricCard
+          key={metric.id}
+          label={metric.label}
+          value={metric.value}
+          Icon={metric.icon}
+          border={metric.border}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default MetricsSummary;
