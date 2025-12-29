@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { HierarchyNode } from '../../../interfaces/hierarchy';
-import { deleteNode, updateWeightage } from '../../store/hierarchy/hierarchySlice';
+import {
+  deleteNode,
+  updateWeightage,
+  toggleOverride
+} from '../../store/hierarchy/hierarchySlice';
 
 interface Props {
   node: HierarchyNode;
@@ -11,16 +15,6 @@ interface Props {
 const TreeNode: React.FC<Props> = ({ node, depth }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const [error, setError] = useState('');
-
-  const onChange = (value: number) => {
-    if (value < 0 || value > 100) {
-      setError('Value must be between 0 and 100');
-      return;
-    }
-    setError('');
-    dispatch(updateWeightage({ id: node.id, value }));
-  };
 
   return (
     <div style={{ marginLeft: depth * 20 }}>
@@ -30,15 +24,27 @@ const TreeNode: React.FC<Props> = ({ node, depth }) => {
         <input
           type="number"
           value={node.weightage}
-          disabled={node.level === 'METRIC' && node.override === null}
+          disabled={node.level === 'METRIC' && !node.override}
           style={{ width: 70 }}
-          onChange={e => onChange(Number(e.target.value))}
+          onChange={e =>
+            dispatch(
+              updateWeightage({
+                id: node.id,
+                value: Number(e.target.value)
+              })
+            )
+          }
         />
         %
 
         {node.level === 'METRIC' && (
           <label>
-            <input type="checkbox" /> Override
+            <input
+              type="checkbox"
+              checked={!!node.override}
+              onChange={() => dispatch(toggleOverride(node.id))}
+            />{' '}
+            Override
           </label>
         )}
 
@@ -56,8 +62,6 @@ const TreeNode: React.FC<Props> = ({ node, depth }) => {
           </div>
         )}
       </div>
-
-      {error && <div style={{ color: 'red' }}>{error}</div>}
 
       {node.children?.map(child => (
         <TreeNode key={child.id} node={child} depth={depth + 1} />

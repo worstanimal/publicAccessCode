@@ -5,6 +5,6 @@ export interface HierarchyNode {
   name: string;
   level: LevelType;
   weightage: number;
-  override?: number | null;
+  override?: boolean; // true = editable (METRIC only)
   children?: HierarchyNode[];
 }

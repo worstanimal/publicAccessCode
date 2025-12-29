@@ -1,0 +1,94 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { HierarchyNode } from '../../../interfaces/hierarchy';
+import { hierarchyMockData } from '../../../mockData/hierarchy.mock';
+import { rebalanceMetrics } from '../../utils/hierarchyUtils';
+
+interface HierarchyState {
+  tree: HierarchyNode[];
+}
+
+const initialState: HierarchyState = {
+  tree: hierarchyMockData
+};
+
+const findParent = (
+  nodes: HierarchyNode[],
+  childId: string
+): HierarchyNode | null => {
+  for (const node of nodes) {
+    if (node.children?.some(c => c.id === childId)) return node;
+    if (node.children) {
+      const found = findParent(node.children, childId);
+      if (found) return found;
+    }
+  }
+  return null;
+};
+
+const hierarchySlice = createSlice({
+  name: 'hierarchy',
+  initialState,
+  reducers: {
+    updateWeightage(
+      state,
+      action: PayloadAction<{ id: string; value: number }>
+    ) {
+      const parent = findParent(state.tree, action.payload.id);
+
+      if (parent?.children && parent.level === 'TOPIC') {
+        parent.children = rebalanceMetrics(
+          parent.children.map(c =>
+            c.id === action.payload.id
+              ? { ...c, weightage: action.payload.value }
+              : c
+          ),
+          action.payload.id
+        );
+        return;
+      }
+
+      const updateNode = (nodes: HierarchyNode[]) => {
+        for (const n of nodes) {
+          if (n.id === action.payload.id) {
+            n.weightage = action.payload.value;
+            return true;
+          }
+          if (n.children && updateNode(n.children)) return true;
+        }
+        return false;
+      };
+
+      updateNode(state.tree);
+    },
+
+    toggleOverride(state, action: PayloadAction<string>) {
+      const toggle = (nodes: HierarchyNode[]) => {
+        for (const n of nodes) {
+          if (n.id === action.payload && n.level === 'METRIC') {
+            n.override = !n.override;
+            return true;
+          }
+          if (n.children && toggle(n.children)) return true;
+        }
+        return false;
+      };
+      toggle(state.tree);
+    },
+
+    deleteNode(state, action: PayloadAction<string>) {
+      const remove = (nodes: HierarchyNode[]): HierarchyNode[] =>
+        nodes
+          .filter(n => n.id !== action.payload)
+          .map(n => ({
+            ...n,
+            children: n.children ? remove(n.children) : []
+          }));
+      state.tree = remove(state.tree);
+    }
+  }
+});
+
+export const { updateWeightage, deleteNode, toggleOverride } =
+  hierarchySlice.actions;
+
+export default hierarchySlice.reducer;

@@ -1,13 +1,21 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import TreeNode from './TreeNode';
+import '../../styles/hierarchy.scss';
 
 const TreeStructureView = () => {
   const tree = useSelector((state: RootState) => state.hierarchy.tree);
 
   return (
-    <div>
-      <h2>Tree Structure View</h2>
+    <div className="tree-container">
+      <div className="tree-header">
+        <div>Name</div>
+        <div>Weight</div>
+        <div>Override</div>
+        <div>Edit</div>
+        <div>More</div>
+      </div>
+
       {tree.map(node => (
         <TreeNode key={node.id} node={node} depth={0} />
       ))}

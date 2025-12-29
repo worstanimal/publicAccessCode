@@ -1,0 +1,75 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { HierarchyNode } from '../../../interfaces/hierarchy';
+import {
+  deleteNode,
+  updateWeightage,
+  toggleOverride
+} from '../../store/hierarchy/hierarchySlice';
+
+interface Props {
+  node: HierarchyNode;
+  depth: number;
+}
+
+const TreeNode: React.FC<Props> = ({ node, depth }) => {
+  const dispatch = useDispatch();
+  const [showMenu, setShowMenu] = useState(false);
+
+  return (
+    <>
+      <div className="tree-row">
+        <div className={`node-name level-${node.level.toLowerCase()}`}>
+          {node.name}
+        </div>
+
+        <input
+          className="weight-input"
+          type="number"
+          value={node.weightage}
+          disabled={node.level === 'METRIC' && !node.override}
+          onChange={e =>
+            dispatch(
+              updateWeightage({
+                id: node.id,
+                value: Number(e.target.value)
+              })
+            )
+          }
+        />
+
+        {node.level === 'METRIC' ? (
+          <input
+            type="checkbox"
+            checked={!!node.override}
+            onChange={() => dispatch(toggleOverride(node.id))}
+          />
+        ) : (
+          '-'
+        )}
+
+        <button>✏️</button>
+
+        <div className="actions">
+          <button onClick={() => setShowMenu(!showMenu)}>⋮</button>
+          {showMenu && (
+            <div className="popover">
+              <button
+                style={{ color: 'red' }}
+                onClick={() => dispatch(deleteNode(node.id))}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {node.children?.map(child => (
+        <TreeNode key={child.id} node={child} depth={depth + 1} />
+      ))}
+    </>
+  );
+};
+
+export default TreeNode;

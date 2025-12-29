@@ -24,14 +24,14 @@ export const hierarchyMockData: HierarchyNode[] = [
                 name: 'MFA Adoption Rate',
                 level: 'METRIC',
                 weightage: 50,
-                override: null
+                override: false
               },
               {
                 id: 'metric-2',
                 name: 'SSO Implementation',
                 level: 'METRIC',
                 weightage: 50,
-                override: null
+                override: false
               }
             ]
           }

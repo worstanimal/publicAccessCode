@@ -1,0 +1,31 @@
+import { useState } from 'react';
+import TreeStructureView from './TreeStructureView';
+import HierarchyMapView from './HierarchyMapView';
+import '../../styles/tabs.scss';
+
+const HierarchyTabs = () => {
+  const [active, setActive] = useState<'TREE' | 'MAP'>('TREE');
+
+  return (
+    <>
+      <div className="tabs">
+        <button
+          className={`tab ${active === 'TREE' ? 'active' : ''}`}
+          onClick={() => setActive('TREE')}
+        >
+          Tree Structure View
+        </button>
+        <button
+          className={`tab ${active === 'MAP' ? 'active' : ''}`}
+          onClick={() => setActive('MAP')}
+        >
+          Hierarchy Map View
+        </button>
+      </div>
+
+      {active === 'TREE' ? <TreeStructureView /> : <HierarchyMapView />}
+    </>
+  );
+};
+
+export default HierarchyTabs;
