@@ -8,7 +8,6 @@ const TreeStructureView = () => {
   return (
     <div>
       <h2>Tree Structure View</h2>
-
       {tree.map(node => (
         <TreeNode key={node.id} node={node} depth={0} />
       ))}

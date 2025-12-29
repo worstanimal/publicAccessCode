@@ -1,0 +1,9 @@
+import { HierarchyNode } from '../../interfaces/hierarchy';
+
+export const autoSplitMetrics = (metrics: HierarchyNode[]) => {
+  const split = Number((100 / metrics.length).toFixed(2));
+  return metrics.map(metric => ({
+    ...metric,
+    weightage: split
+  }));
+};

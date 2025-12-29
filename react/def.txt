@@ -1,0 +1,42 @@
+import { HierarchyNode } from '../interfaces/hierarchy';
+
+export const hierarchyMockData: HierarchyNode[] = [
+  {
+    id: 'std-1',
+    name: 'Cyber & Information Security',
+    level: 'STANDARD',
+    weightage: 50,
+    children: [
+      {
+        id: 'area-1',
+        name: 'Identity & Access Management',
+        level: 'AREA',
+        weightage: 100,
+        children: [
+          {
+            id: 'topic-1',
+            name: 'Authentication Controls',
+            level: 'TOPIC',
+            weightage: 100,
+            children: [
+              {
+                id: 'metric-1',
+                name: 'MFA Adoption Rate',
+                level: 'METRIC',
+                weightage: 50,
+                override: null
+              },
+              {
+                id: 'metric-2',
+                name: 'SSO Implementation',
+                level: 'METRIC',
+                weightage: 50,
+                override: null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
