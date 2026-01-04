@@ -1,0 +1,13 @@
+export interface AttachmentItem {
+  id: number;
+  fileName: string;
+  fileSize: string;
+  uploadedBy: string;
+}
+
+export interface AttachmentsCardProps {
+  title: string;
+  icon?: React.ReactNode;
+  attachments: AttachmentItem[];
+  onDownload?: (item: AttachmentItem) => void;
+}

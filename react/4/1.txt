@@ -1,0 +1,17 @@
+export interface ProgressInfo {
+  label: string;
+  completedSteps: number;
+  totalSteps: number;
+}
+
+export interface StatItem {
+  label: string;
+  value: number;
+}
+
+export interface StatusCardProps {
+  title: string;
+  progress?: ProgressInfo;
+  statsTitle?: string;
+  stats?: StatItem[];
+}

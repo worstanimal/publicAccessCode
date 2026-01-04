@@ -1,0 +1,8 @@
+import { PeopleItem } from "../interfaces/peopleList.interface";
+
+export const contributorsData: PeopleItem[] = [
+  { id: 1, name: "Michael Chen", subtitle: "Creator" },
+  { id: 2, name: "Sarah Johnson", subtitle: "Assignee" },
+  { id: 3, name: "David Kumar", subtitle: "Reviewer" },
+  { id: 4, name: "Lisa Wang", subtitle: "Contributor" }
+];

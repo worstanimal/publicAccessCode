@@ -1,0 +1,45 @@
+import React from "react";
+import { PeopleListProps } from "../interfaces/peopleList.interface";
+import "./PeopleList.scss";
+
+const getInitials = (name: string) =>
+  name
+    .split(" ")
+    .map(n => n[0])
+    .join("")
+    .toUpperCase();
+
+const PeopleList: React.FC<PeopleListProps> = ({
+  title,
+  icon,
+  data
+}) => {
+  return (
+    <div className="people-list">
+      <div className="header">
+        <div className="left">
+          {icon}
+          <h3>{title}</h3>
+        </div>
+        <span className="count">{data.length}</span>
+      </div>
+
+      <div className="list">
+        {data.map(item => (
+          <div className="list-item" key={item.id}>
+            <div className="avatar">
+              {getInitials(item.name)}
+            </div>
+
+            <div className="info">
+              <div className="name">{item.name}</div>
+              <div className="subtitle">{item.subtitle}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default PeopleList;

@@ -1,0 +1,7 @@
+import { PeopleItem } from "../interfaces/peopleList.interface";
+
+export const subscribersData: PeopleItem[] = [
+  { id: 1, name: "Emily Rodriguez", subtitle: "emily.r@company.com" },
+  { id: 2, name: "James Park", subtitle: "james.p@company.com" },
+  { id: 3, name: "Anna Martinez", subtitle: "anna.m@company.com" }
+];

@@ -1,0 +1,19 @@
+import AttachmentsCard from "./components/AttachmentsCard";
+import { attachmentsData } from "./mockData/attachments";
+
+const Page = () => {
+  const handleDownload = (file: any) => {
+    console.log("Download:", file.fileName);
+  };
+
+  return (
+    <AttachmentsCard
+      title="Attachments"
+      icon={<span>📎</span>}
+      attachments={attachmentsData}
+      onDownload={handleDownload}
+    />
+  );
+};
+
+export default Page;

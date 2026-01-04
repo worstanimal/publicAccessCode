@@ -1,0 +1,42 @@
+export const auditTrailData = [
+  {
+    id: 1,
+    title: "CIM Created",
+    description: "Initial CIM ticket created",
+    user: "Michael Chen",
+    date: "2024-11-18",
+    time: "09:15"
+  },
+  {
+    id: 2,
+    title: "Assigned",
+    description: "Assigned to Sarah Johnson",
+    user: "Michael Chen",
+    date: "2024-11-18",
+    time: "09:20"
+  },
+  {
+    id: 3,
+    title: "Step Completed",
+    description: "Completed Step 1: Basic Information",
+    user: "Sarah Johnson",
+    date: "2024-11-18",
+    time: "14:30"
+  },
+  {
+    id: 4,
+    title: "Step Completed",
+    description: "Completed Step 2: Impact Analysis",
+    user: "Sarah Johnson",
+    date: "2024-11-19",
+    time: "10:15"
+  },
+  {
+    id: 5,
+    title: "Comment Added",
+    description: "Added technical review comments",
+    user: "David Kumar",
+    date: "2024-11-19",
+    time: "10:30"
+  }
+];

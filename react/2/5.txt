@@ -1,0 +1,23 @@
+import PeopleList from "./components/PeopleList";
+import { contributorsData } from "./mockData/contributors";
+import { subscribersData } from "./mockData/subscribers";
+
+const Page = () => {
+  return (
+    <>
+      <PeopleList
+        title="Contributors"
+        icon={<span>👥</span>}
+        data={contributorsData}
+      />
+
+      <PeopleList
+        title="Subscribers"
+        icon={<span>👁</span>}
+        data={subscribersData}
+      />
+    </>
+  );
+};
+
+export default Page;

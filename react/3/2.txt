@@ -1,0 +1,32 @@
+import { DetailItem } from "../interfaces/details.interface";
+
+export const keyDetailsData: DetailItem[] = [
+  {
+    id: 1,
+    label: "Created By",
+    icon: <span>👤</span>,
+    type: "person",
+    value: "Michael Chen"
+  },
+  {
+    id: 2,
+    label: "Assigned To",
+    icon: <span>👤</span>,
+    type: "person",
+    value: "Sarah Johnson"
+  },
+  {
+    id: 3,
+    label: "Created Date",
+    icon: <span>📅</span>,
+    type: "text",
+    value: "2024-11-18"
+  },
+  {
+    id: 4,
+    label: "Last Updated",
+    icon: <span>⏰</span>,
+    type: "text",
+    value: "2024-11-19 10:30"
+  }
+];

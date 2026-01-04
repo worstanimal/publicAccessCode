@@ -1,0 +1,14 @@
+export type DetailValueType = "person" | "text";
+
+export interface DetailItem {
+  id: number;
+  label: string;
+  icon: React.ReactNode;
+  type: DetailValueType;
+  value: string;
+}
+
+export interface DetailsCardProps {
+  title: string;
+  items: DetailItem[];
+}

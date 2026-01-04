@@ -1,0 +1,45 @@
+import React from "react";
+import { DetailsCardProps } from "../interfaces/details.interface";
+import "./DetailsCard.scss";
+
+const getInitials = (name: string) =>
+  name
+    .split(" ")
+    .map(n => n[0])
+    .join("")
+    .toUpperCase();
+
+const DetailsCard: React.FC<DetailsCardProps> = ({
+  title,
+  items
+}) => {
+  return (
+    <div className="details-card">
+      <h3 className="title">{title}</h3>
+
+      {items.map(item => (
+        <div className="detail-row" key={item.id}>
+          <div className="label">
+            {item.icon}
+            <span>{item.label}</span>
+          </div>
+
+          <div className="value">
+            {item.type === "person" ? (
+              <div className="person">
+                <span className="avatar">
+                  {getInitials(item.value)}
+                </span>
+                <span className="name">{item.value}</span>
+              </div>
+            ) : (
+              <span className="text">{item.value}</span>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default DetailsCard;

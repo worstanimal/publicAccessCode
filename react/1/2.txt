@@ -1,0 +1,8 @@
+export interface AuditTrailItem {
+  id: number;
+  title: string;
+  description: string;
+  user: string;
+  date: string;
+  time: string;
+}

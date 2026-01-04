@@ -1,0 +1,22 @@
+import { AttachmentItem } from "../interfaces/attachments.interface";
+
+export const attachmentsData: AttachmentItem[] = [
+  {
+    id: 1,
+    fileName: "authentication-audit-report.pdf",
+    fileSize: "2.4 MB",
+    uploadedBy: "Michael Chen"
+  },
+  {
+    id: 2,
+    fileName: "monitoring-requirements.docx",
+    fileSize: "856 KB",
+    uploadedBy: "Sarah Johnson"
+  },
+  {
+    id: 3,
+    fileName: "siem-integration-diagram.png",
+    fileSize: "1.2 MB",
+    uploadedBy: "David Kumar"
+  }
+];

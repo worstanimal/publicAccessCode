@@ -1,0 +1,13 @@
+import DetailsCard from "./components/DetailsCard";
+import { keyDetailsData } from "./mockData/keyDetails";
+
+const Page = () => {
+  return (
+    <DetailsCard
+      title="Key Details"
+      items={keyDetailsData}
+    />
+  );
+};
+
+export default Page;

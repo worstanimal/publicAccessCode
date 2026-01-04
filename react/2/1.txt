@@ -1,0 +1,11 @@
+export interface PeopleItem {
+  id: number;
+  name: string;
+  subtitle: string; // role OR email
+}
+
+export interface PeopleListProps {
+  title: string;
+  icon: React.ReactNode;
+  data: PeopleItem[];
+}

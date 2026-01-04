@@ -1,0 +1,68 @@
+import React from "react";
+import { StatusCardProps } from "../interfaces/statusCard.interface";
+import "./StatusCard.scss";
+
+const StatusCard: React.FC<StatusCardProps> = ({
+  title,
+  progress,
+  statsTitle,
+  stats
+}) => {
+  const percent =
+    progress
+      ? Math.round(
+          (progress.completedSteps / progress.totalSteps) * 100
+        )
+      : 0;
+
+  return (
+    <div className="status-card">
+      <h3>{title}</h3>
+
+      {/* Progress Section */}
+      {progress && (
+        <div className="progress-section">
+          <div className="row space-between">
+            <span>{progress.label}</span>
+            <strong>
+              {progress.completedSteps}/{progress.totalSteps} steps
+            </strong>
+          </div>
+
+          <div className="progress-bar">
+            <div
+              className="fill"
+              style={{ width: `${percent}%` }}
+            />
+          </div>
+
+          <div className="caption">{percent}% complete</div>
+        </div>
+      )}
+
+      {/* Stats Section */}
+      {stats && (
+        <div className="stats-section">
+          <div className="row space-between header">
+            <span>{statsTitle}</span>
+            <strong>
+              {stats.reduce((a, b) => a + b.value, 0)} total
+            </strong>
+          </div>
+
+          {stats.map(item => (
+            <div
+              className="row space-between stat-row"
+              key={item.label}
+            >
+              <span>{item.label}</span>
+              <span>{item.value}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default StatusCard;

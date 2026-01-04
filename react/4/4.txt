@@ -1,0 +1,8 @@
+import StatusCard from "./components/StatusCard";
+import { progressTasksData } from "./mockData/progressTasks";
+
+const Page = () => {
+  return <StatusCard {...progressTasksData} />;
+};
+
+export default Page;

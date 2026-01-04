@@ -1,0 +1,47 @@
+import React from "react";
+import { AttachmentsCardProps } from "../interfaces/attachments.interface";
+import "./AttachmentsCard.scss";
+
+const AttachmentsCard: React.FC<AttachmentsCardProps> = ({
+  title,
+  icon,
+  attachments,
+  onDownload
+}) => {
+  return (
+    <div className="attachments-card">
+      <div className="header">
+        <div className="left">
+          {icon}
+          <h3>{title}</h3>
+        </div>
+        <span className="count">{attachments.length}</span>
+      </div>
+
+      {attachments.map(item => (
+        <div className="attachment-row" key={item.id}>
+          <div className="file-info">
+            <span className="file-icon">📄</span>
+
+            <div>
+              <div className="file-name">{item.fileName}</div>
+              <div className="meta">
+                {item.fileSize} • {item.uploadedBy}
+              </div>
+            </div>
+          </div>
+
+          <button
+            className="download-btn"
+            onClick={() => onDownload?.(item)}
+            aria-label="Download"
+          >
+            ⬇
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default AttachmentsCard;
